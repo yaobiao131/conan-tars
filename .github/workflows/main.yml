@@ -1,4 +1,4 @@
-name: Build nodejs library
+name: Build tars library
 
 on:
   push:
