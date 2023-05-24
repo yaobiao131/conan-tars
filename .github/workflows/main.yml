@@ -25,8 +25,8 @@ jobs:
       - name: Build Debug
         run: conan create . _/_ --build=missing -sbuild_type=Debug
       - name: Upload Debug
-        run: conan upload tars/3.0.13 --all -r conan --retry 3 --retry-wait 10 --confirm
+        run: conan upload tars/3.0.13 --all -r conan --retry 3 --retry-wait 10 --confirm --parallel
       - name: Build Release
         run: conan create . _/_ --build=missing -sbuild_type=Release
       - name: Upload Release
-        run: conan upload tars/3.0.13 --all -r conan --retry 3 --retry-wait 10 --confirm
+        run: conan upload tars/3.0.13 --all -r conan --retry 3 --retry-wait 10 --confirm --parallel
