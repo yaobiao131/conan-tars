@@ -39,7 +39,10 @@ class TarsConan(ConanFile):
 
     def build(self):
         cmake = CMake(self)
-        cmake.configure(variables={"CMAKE_CXX_FLAGS": "/MDd"})
+        variables = {}
+        if self.settings.os == 'Windows':
+            variables["CMAKE_CXX_FLAGS"] = "/MDd" if self.settings.build_type == 'Debug' else "/MD"
+        cmake.configure(variables=variables)
         cmake.build()
 
     def package(self):
