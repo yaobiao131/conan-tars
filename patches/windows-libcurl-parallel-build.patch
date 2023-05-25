@@ -1,0 +1,11 @@
+--- cmake/Thirdparty.cmake
++++ cmake/Thirdparty.cmake
+@@ -104,7 +104,7 @@ if(WIN32)
+         CONFIGURE_COMMAND ${CMAKE_COMMAND} . -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/src/curl
+         SOURCE_DIR ${CMAKE_BINARY_DIR}/src/curl-lib
+         BUILD_IN_SOURCE 1
+-        BUILD_COMMAND ${CMAKE_COMMAND} --build . --config release
++        BUILD_COMMAND ${CMAKE_COMMAND} --build . --config release -j
+         INSTALL_COMMAND ${CMAKE_COMMAND} --build . --config release --target install
+         URL_MD5 b9bb5e11d579425154a9f97ed44be9b8
+     )

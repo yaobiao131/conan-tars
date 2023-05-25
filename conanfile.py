@@ -14,7 +14,7 @@ class TarsConan(ConanFile):
 
     package_type = "library"
     settings = "os", "arch", "compiler", "build_type"
-    exports_sources = "patches/*"
+    exports_sources = "patches/*.patch"
     scm = {
         "type": "git",
         "url": "https://github.com/TarsCloud/TarsCpp.git",
@@ -24,6 +24,9 @@ class TarsConan(ConanFile):
 
     def source(self):
         patch(self, patch_file=os.path.join(self.source_folder, "patches/remove-gtest.patch"))
+        if self.settings.os == 'Windows':
+            patch(self, patch_file=os.path.join(self.source_folder, "patches/windows-libcurl-parallel-build.patch"))
+        patch(self, patch_file=os.path.join(self.source_folder, "patches/change-protocol-install-destination.patch"))
 
     def generate(self):
         tc = CMakeToolchain(self)
@@ -36,11 +39,14 @@ class TarsConan(ConanFile):
 
     def build(self):
         cmake = CMake(self)
-        cmake.configure()
+        cmake.configure(variables={"CMAKE_CXX_FLAGS": "/MDd"})
         cmake.build()
 
     def package(self):
         copy(self, "LICENSE", src=self.source_folder, dst=os.path.join(self.package_folder, "licenses"))
         cmake = CMake(self)
         cmake.install()
-        rmdir(self, os.path.join(self.package_folder, "lib", "cmake"))
+        rmdir(self, os.path.join(self.package_folder, "makefile"))
+        rmdir(self, os.path.join(self.package_folder, "tools"))
+        rmdir(self, os.path.join(self.package_folder, "script"))
+        rmdir(self, os.path.join(self.package_folder, "thirdparty"))

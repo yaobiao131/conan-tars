@@ -1,0 +1,21 @@
+--- servant/protocol/servant/CMakeLists.txt
++++ servant/protocol/servant/CMakeLists.txt
+@@ -67,10 +67,11 @@ install(DIRECTORY . DESTINATION include/servant
+         PATTERN "*.tars"
+         PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ GROUP_EXECUTE GROUP_READ WORLD_READ WORLD_EXECUTE)
+
+-if(WIN32)
+-INSTALL(FILES ${TARSPROTOCOLS} DESTINATION   c:\\tarsproto\\protocol\\)
+-elseif(APPLE)
+-INSTALL(FILES ${TARSPROTOCOLS} DESTINATION   $ENV{HOME}/tarsproto/protocol/)
+-elseif(UNIX)
+-INSTALL(FILES ${TARSPROTOCOLS} DESTINATION   /home/tarsproto/protocol/)
+-endif()
++# if(WIN32)
++# INSTALL(FILES ${TARSPROTOCOLS} DESTINATION   c:\\tarsproto\\protocol\\)
++# elseif(APPLE)
++# INSTALL(FILES ${TARSPROTOCOLS} DESTINATION   $ENV{HOME}/tarsproto/protocol/)
++# elseif(UNIX)
++# INSTALL(FILES ${TARSPROTOCOLS} DESTINATION   /home/tarsproto/protocol/)
++# endif()
++INSTALL(FILES ${TARSPROTOCOLS} DESTINATION   include/framework)
